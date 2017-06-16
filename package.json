@@ -1,0 +1,22 @@
+{
+	"name": "kamina-js",
+	"version": "1.2.0",
+	"description": "kamina-js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tehcojam/kamina-js.git"
+	},
+	"author": "tehcojam",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/tehcojam/kamina-js/issues"
+	},
+	"devDependencies": {
+		"glup": "^1.0.14",
+		"gulp-plumber": "^1.1.0",
+		"gulp-rename": "^1.2.2",
+		"gulp-uglify": "^3.0.0",
+		"gulp-watch": "^4.3.11",
+		"uglify-es": "^3.0.15"
+	}
+}
