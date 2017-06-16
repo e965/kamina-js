@@ -10,7 +10,7 @@ $make.qs(
 )
 ```
 * * *
-`$make.xss(value)`:
+`$make.safe(value)`:
 ```js
 $make.safe('<alert>sosi, zloumishlennik</alert>')
 ```
