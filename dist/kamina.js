@@ -12,7 +12,7 @@ var $make = {
 			return document.querySelectorAll(qS)
 			else return document.querySelector(qS)
 	},
-	safe: (value) =>	value.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
+	safe: (value) => value.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
 }
 
 var $create = {
@@ -27,9 +27,8 @@ var $create = {
 			else elem.innerHTML = content
 
 		if (classes) elem.setAttribute('class', classes)
-		if (options.includes('html')) elem = elem.outerHTML
 
-		return elem
+		return options.includes('html') ? elem.outerHTML : elem
 	},
 	link: function(url, content, options) {
 		let link = this.elem('a')
@@ -46,9 +45,7 @@ var $create = {
 			link.textContent = content
 			else link.innerHTML = content
 
-		if (options.includes('html')) link = link.outerHTML
-
-		return link
+		return options.includes('html') ? link.outerHTML : link
 	}
 }
 
@@ -58,11 +55,6 @@ var $check = {
 		return (params.get(value) == '') ? true : params.get(value)
 	}
 }
-
-/*
- * Объекты-функции для локального хранилища
- * .test() - тестирование на включенность-выключенность
- */
 
 var $ls = {
 	get: (item) => localStorage.getItem(item),
@@ -74,6 +66,6 @@ var $ls = {
 			this.set(test, test)
 			this.rm(test)
 			return true
-		} catch (e) {}
+		} catch (e) { return false }
 	}
 }

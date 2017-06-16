@@ -3,7 +3,6 @@
 let
 	gulp =      require('gulp'),
 	rename =    require('gulp-rename'),
-	watch =     require('gulp-watch'),
 	plumber =   require('gulp-plumber'),
 	composer =  require('gulp-uglify/composer'),
 	uglifyjs =  require('uglify-es')
@@ -17,7 +16,6 @@ let paths = {
 
 gulp.task('default', () => gulp.src(paths.dev)
 	.pipe(plumber())
-	.pipe(watch(paths.dev))
 	.pipe(minify({}))
 	.pipe(rename({suffix: '.min'}))
 	.pipe(gulp.dest(paths.prod))
