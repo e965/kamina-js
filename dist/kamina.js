@@ -8,9 +8,7 @@
 var $make = {
 	qs: function(qS, options) {
 		if (!options) options = []
-		if (options.includes('a'))
-			return document.querySelectorAll(qS)
-			else return document.querySelector(qS)
+		return options.includes('a') ? document.querySelectorAll(qS) : document.querySelector(qS)
 	},
 	safe: (value) => value.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
 }

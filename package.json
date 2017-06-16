@@ -1,7 +1,7 @@
 {
 	"name": "kamina-js",
-	"version": "1.2.1",
-	"description": "kamina-js",
+	"version": "1.2.2",
+	"description": "Syntactic sugar (or something like that) for own needs.",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/tehcojam/kamina-js.git"
