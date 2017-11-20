@@ -6,59 +6,79 @@
  */
 
 var $make = {
-	qs: function(qS, options) {
-		if (!options) options = []
-		return options.includes('a') ? document.querySelectorAll(qS) : document.querySelector(qS)
+	qs: (qS, options) => {
+		if (!options) { options = [] }
+		return options.includes('a')
+			? document.querySelectorAll(qS)
+			: document.querySelector(qS)
 	},
-	safe: (value) => value.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
+	qsf: (qS, from, options) => {
+		if (!options) { options = [] }
+		return options.includes('a')
+			? from.querySelectorAll(qS)
+			: from.querySelector(qS)
+	},
+	safe: value => value.toString()
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/'/g, '&#39;')
+		.replace(/"/g, '&#34;')
 }
 
 var $create = {
-	elem: function(what, content, classes, options) {
+	elem: (what, content, classes, options) => {
 		let elem = document.createElement(what)
 
-		if (!options) options = []
-		if (!content) content = ''
+		if (!options) { options = [] }
+		if (!content) { content = '' }
 
-		if (content && options.includes('s'))
+		if (content && options.includes('s')) {
 			elem.textContent = content
-			else elem.innerHTML = content
+		} else { elem.innerHTML = content }
 
-		if (classes) elem.setAttribute('class', classes)
+		if (classes) {
+			elem.setAttribute('class', classes)
+		}
 
 		return options.includes('html') ? elem.outerHTML : elem
 	},
-	link: function(url, content, options) {
+	link: (url, content, options) => {
 		let link = this.elem('a')
 
-		if (url)
-			link.setAttribute('href', $make.safe(url))
-			else link.setAttribute('href', 'javascript:void(0)')
+		link.setAttribute('href', (url != '')
+			? $make.safe(url)
+			: 'javascript:void(0)')
 
-		if (url.indexOf('http') == 0) link.setAttribute('target', '_blank')
+		if (url.indexOf('http') == 0) {
+			link.setAttribute('target', '_blank')
+		}
 
-		if (!options) options = []
-		if (options.includes('e')) link.setAttribute('rel', 'nofollow noopener')
-		if (options.includes('s'))
+		if (!options) { options = [] }
+
+		if (options.includes('e')) {
+			link.setAttribute('rel', 'nofollow noopener')
+		}
+
+		if (options.includes('s') && content) {
 			link.textContent = content
-			else link.innerHTML = content
+		} else { link.innerHTML = content }
 
 		return options.includes('html') ? link.outerHTML : link
 	}
 }
 
 var $check = {
-	get: function(value) {
+	get: value => {
 		let params = new URLSearchParams(location.search)
 		return (params.get(value) == '') ? true : params.get(value)
 	}
 }
 
 var $ls = {
-	get: (item) => localStorage.getItem(item),
+	get: item => localStorage.getItem(item),
 	set: (item, value) => localStorage.setItem(item, value),
-	rm: (item) => localStorage.removeItem(item),
-	test: function() {
+	rm: item => localStorage.removeItem(item),
+	test() {
 		let test = 'ls_test'
 		try {
 			this.set(test, test)
