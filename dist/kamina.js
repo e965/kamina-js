@@ -40,10 +40,12 @@ var $create = {
 			elem.setAttribute('class', classes)
 		}
 
-		return options.includes('html') ? elem.outerHTML : elem
+		return options.includes('html')
+			? elem.outerHTML
+			: elem
 	},
 	link: (url, content, options) => {
-		let link = this.elem('a')
+		let link = document.createElement('a')
 
 		link.setAttribute('href', (url != '')
 			? $make.safe(url)
@@ -63,14 +65,18 @@ var $create = {
 			link.textContent = content
 		} else { link.innerHTML = content }
 
-		return options.includes('html') ? link.outerHTML : link
+		return options.includes('html')
+			? link.outerHTML
+			: link
 	}
 }
 
 var $check = {
 	get: value => {
 		let params = new URLSearchParams(location.search)
-		return (params.get(value) == '') ? true : params.get(value)
+		return (params.get(value) == '')
+			? true
+			: params.get(value)
 	}
 }
 
