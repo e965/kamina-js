@@ -14,6 +14,10 @@ var $make = {
 	},
 	qsf: (qS, from, options) => {
 		if (!options) { options = [] }
+		if (!from.nodeName) {
+			from = document.querySelector(from)
+		}
+
 		return options.includes('a')
 			? from.querySelectorAll(qS)
 			: from.querySelector(qS)
@@ -23,6 +27,7 @@ var $make = {
 		.replace(/>/g, '&gt;')
 		.replace(/'/g, '&#39;')
 		.replace(/"/g, '&#34;')
+		.replace(/&/g, '&amp;')
 }
 
 var $create = {

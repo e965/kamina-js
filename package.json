@@ -2,10 +2,7 @@
 	"name": "kamina-js",
 	"version": "1.2.3-dev",
 	"description": "Syntactic sugar (or something like that) for own needs.",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/tehcojam/kamina-js.git"
-	},
+	"repository": "github:tehcojam/kamina-js",
 	"author": "tehcojam",
 	"license": "MIT",
 	"bugs": {
@@ -16,6 +13,6 @@
 		"gulp-plumber": "^1.1.0",
 		"gulp-rename": "^1.2.2",
 		"gulp-uglify": "^3.0.0",
-		"uglify-es": "^3.1.10"
+		"uglify-es": "^3.2.2"
 	}
 }
