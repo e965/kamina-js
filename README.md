@@ -29,7 +29,7 @@ $make.qsf('.goal', '.life', ['a'])
 
 `$make.safe(value)`:
 ```js
-$make.safe('<alert>ya tebya vzlomal ololo!</alert>')    // Экскейпит строку от некоторых нежелательных символов
+$make.safe('<img onerror="alert(\'ya tebya vzlomal ololo!\')" src="">') // Экскейпит строку от некоторых нежелательных символов
 ```
 
 ---
@@ -60,6 +60,11 @@ $create.link(
 		'html'               // функция вернёт html в текстовом виде
 	]
 )
+```
+
+`$create.text(content)`:
+```js
+$create.text('ololo') // создаёт текстовый узел с текстом "ololo"
 ```
 
 ---

@@ -1,18 +1,20 @@
 {
 	"name": "kamina-js",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"description": "Syntactic sugar (or something like that) for own needs.",
 	"repository": "github:tehcojam/kamina-js",
-	"author": "tehcojam",
+	"author": "Cojam",
 	"license": "MIT",
+	"unpkg": "dist/kamina.min.js",
+	"jsdelivr": "dist/kamina.min.js",
+	"browser": "dist/kamina.min.js",
 	"bugs": {
 		"url": "https://github.com/tehcojam/kamina-js/issues"
 	},
 	"devDependencies": {
 		"gulp": "3.9.1",
-		"gulp-plumber": "1.1.0",
+		"gulp-plumber": "1.2.0",
 		"gulp-rename": "1.2.2",
-		"gulp-uglify": "3.0.0",
-		"uglify-es": "3.2.2"
+		"gulp-babel-minify": "0.2.0"
 	}
 }

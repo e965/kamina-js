@@ -1,8 +1,8 @@
 'use strict'
 
 /*
- * kamina.js
- * cojam.ru, 2017
+ * kamina.js, yet another syntactic sugar
+ * cojam.ru, 2017-2018
  */
 
 var $make = {
@@ -23,11 +23,11 @@ var $make = {
 			: from.querySelector(qS)
 	},
 	safe: value => value.toString()
+		.replace(/&/g, '&amp;')
 		.replace(/</g, '&lt;')
 		.replace(/>/g, '&gt;')
 		.replace(/'/g, '&#39;')
 		.replace(/"/g, '&#34;')
-		.replace(/&/g, '&amp;')
 }
 
 var $create = {
@@ -37,9 +37,11 @@ var $create = {
 		if (!options) { options = [] }
 		if (!content) { content = '' }
 
-		if (content && options.includes('s')) {
-			elem.textContent = content
-		} else { elem.innerHTML = content }
+		if (content != '') {
+			elem.innerHTML = options.includes('s')
+				? $make.safe(content)
+				: content
+		}
 
 		if (classes) {
 			elem.setAttribute('class', classes)
@@ -49,8 +51,11 @@ var $create = {
 			? elem.outerHTML
 			: elem
 	},
-	link: (url, content, options) => {
+	link: (url, content, classes, options) => {
 		let link = document.createElement('a')
+
+		if (!options) { options = [] }
+		if (!content) { content = '' }
 
 		link.setAttribute('href', (url != '')
 			? $make.safe(url)
@@ -60,20 +65,21 @@ var $create = {
 			link.setAttribute('target', '_blank')
 		}
 
-		if (!options) { options = [] }
-
 		if (options.includes('e')) {
 			link.setAttribute('rel', 'nofollow noopener')
 		}
 
-		if (options.includes('s') && content) {
-			link.textContent = content
-		} else { link.innerHTML = content }
+		if (content != '') {
+			link.innerHTML = content != '' && options.includes('s')
+				? $make.safe(content)
+				: content
+		}
 
 		return options.includes('html')
 			? link.outerHTML
 			: link
-	}
+	},
+	text: content => document.createTextNode(content)
 }
 
 var $check = {

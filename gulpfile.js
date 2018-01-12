@@ -4,10 +4,7 @@ let
 	gulp =      require('gulp'),
 	rename =    require('gulp-rename'),
 	plumber =   require('gulp-plumber'),
-	composer =  require('gulp-uglify/composer'),
-	uglifyjs =  require('uglify-es')
-
-let minify = composer(uglifyjs, console)
+	minifyJS =  require('gulp-babel-minify')
 
 let paths = {
 	dev: ['dist/**/*.js', '!dist/**/*.min.js'],
@@ -16,7 +13,7 @@ let paths = {
 
 gulp.task('default', () => gulp.src(paths.dev)
 	.pipe(plumber())
-	.pipe(minify({}))
+	.pipe(minifyJS())
 	.pipe(rename({suffix: '.min'}))
 	.pipe(gulp.dest(paths.prod))
 )
