@@ -37,14 +37,14 @@ var $create = {
 		if (!options) { options = [] }
 		if (!content) { content = '' }
 
+		if (classes) {
+			elem.setAttribute('class', classes)
+		}
+
 		if (content != '') {
 			elem.innerHTML = options.includes('s')
 				? $make.safe(content)
 				: content
-		}
-
-		if (classes) {
-			elem.setAttribute('class', classes)
 		}
 
 		return options.includes('html')
@@ -67,6 +67,10 @@ var $create = {
 
 		if (options.includes('e')) {
 			link.setAttribute('rel', 'nofollow noopener')
+		}
+
+		if (classes) {
+			elem.setAttribute('class', classes)
 		}
 
 		if (content != '') {
