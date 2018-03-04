@@ -70,7 +70,7 @@ var $create = {
 		}
 
 		if (classes) {
-			elem.setAttribute('class', classes)
+			link.setAttribute('class', classes)
 		}
 
 		if (content != '') {
