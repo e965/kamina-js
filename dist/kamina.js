@@ -35,13 +35,12 @@ var $create = {
 		let elem = document.createElement(what)
 
 		if (!options) { options = [] }
-		if (!content) { content = '' }
 
-		if (classes) {
+		if (classes && classes != '') {
 			elem.setAttribute('class', classes)
 		}
 
-		if (content != '') {
+		if (content && content != '') {
 			elem.innerHTML = options.includes('s')
 				? $make.safe(content)
 				: content
@@ -55,11 +54,9 @@ var $create = {
 		let link = document.createElement('a')
 
 		if (!options) { options = [] }
-		if (!content) { content = '' }
+		if (!url) { url = 'javascript:void(0)' }
 
-		link.setAttribute('href', (url != '')
-			? $make.safe(url)
-			: 'javascript:void(0)')
+		link.setAttribute('href', url)
 
 		if (url.indexOf('http') == 0) {
 			link.setAttribute('target', '_blank')
@@ -69,12 +66,12 @@ var $create = {
 			link.setAttribute('rel', 'nofollow noopener')
 		}
 
-		if (classes) {
+		if (classes && classes != '') {
 			link.setAttribute('class', classes)
 		}
 
-		if (content != '') {
-			link.innerHTML = content != '' && options.includes('s')
+		if (content && content != '') {
+			link.innerHTML = options.includes('s')
 				? $make.safe(content)
 				: content
 		}
