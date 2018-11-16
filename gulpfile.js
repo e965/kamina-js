@@ -14,6 +14,6 @@ let paths = {
 gulp.task('default', () => gulp.src(paths.dev)
 	.pipe(plumber())
 	.pipe(minifyJS())
-	.pipe(rename({suffix: '.min'}))
+	.pipe(rename({ suffix: '.min' }))
 	.pipe(gulp.dest(paths.prod))
 )

@@ -5,15 +5,14 @@
  * cojam.ru, 2017-2018
  */
 
-var $make = {
-	qs: (qS, options) => {
-		if (!options) { options = [] }
+let $make = {
+	qs: (qS, options = []) => {
 		return options.includes('a')
 			? document.querySelectorAll(qS)
 			: document.querySelector(qS)
 	},
-	qsf: (qS, from, options) => {
-		if (!options) { options = [] }
+
+	qsf: (qS, from, options = []) => {
 		if (!from.nodeName) {
 			from = document.querySelector(from)
 		}
@@ -22,6 +21,7 @@ var $make = {
 			? from.querySelectorAll(qS)
 			: from.querySelector(qS)
 	},
+
 	safe: value => value.toString()
 		.replace(/&/g, '&amp;')
 		.replace(/</g, '&lt;')
@@ -30,17 +30,15 @@ var $make = {
 		.replace(/"/g, '&#34;')
 }
 
-var $create = {
-	elem: (what, content, classes, options) => {
+let $create = {
+	elem: (what = '', content = '', classes = '', options = []) => {
 		let elem = document.createElement(what)
 
-		if (!options) { options = [] }
-
-		if (classes && classes != '') {
+		if (classes != '') {
 			elem.setAttribute('class', classes)
 		}
 
-		if (content && content != '') {
+		if (content != '') {
 			elem.innerHTML = options.includes('s')
 				? $make.safe(content)
 				: content
@@ -50,15 +48,13 @@ var $create = {
 			? elem.outerHTML
 			: elem
 	},
-	link: (url, content, classes, options) => {
-		let link = document.createElement('a')
 
-		if (!options) { options = [] }
-		if (!url) { url = 'javascript:void(0)' }
+	link: (url = 'javascript:void(0)', content = '', classes = '', options = []) => {
+		let link = document.createElement('a')
 
 		link.setAttribute('href', url)
 
-		if (url.indexOf('http') == 0) {
+		if (url.startsWith('http')) {
 			link.setAttribute('target', '_blank')
 		}
 
@@ -66,11 +62,11 @@ var $create = {
 			link.setAttribute('rel', 'nofollow noopener')
 		}
 
-		if (classes && classes != '') {
+		if (classes != '') {
 			link.setAttribute('class', classes)
 		}
 
-		if (content && content != '') {
+		if (content != '') {
 			link.innerHTML = options.includes('s')
 				? $make.safe(content)
 				: content
@@ -80,28 +76,49 @@ var $create = {
 			? link.outerHTML
 			: link
 	},
+
 	text: content => document.createTextNode(content)
 }
 
-var $check = {
+let $check = {
 	get: value => {
 		let params = new URLSearchParams(location.search)
+
 		return (params.get(value) == '')
 			? true
 			: params.get(value)
 	}
 }
 
-var $ls = {
-	get: item => localStorage.getItem(item),
-	set: (item, value) => localStorage.setItem(item, value),
-	rm: item => localStorage.removeItem(item),
+let $storage = {
+	getType: (options = []) =>
+		options.includes('s')
+			? sessionStorage
+			: localStorage,
+
+	get(item, options) {
+		return (this.getType(options)).getItem(item)
+	},
+
+	set(item, value, options) {
+		return (this.getType(options)).setItem(item, value)
+	},
+
+	rm(item, options) {
+		return (this.getType(options)).removeItem(item)
+	},
+
 	test() {
-		let test = 'ls_test'
+		let test = `$s_${Math.random()}`
+
 		try {
+			console.log(this.getType_)
+
 			this.set(test, test)
 			this.rm(test)
 			return true
-		} catch (e) { return false }
+		} catch (e) { console.log(e); return false }
 	}
 }
+
+let $ls = $storage // для сохранения совместимости со старыми версиями
