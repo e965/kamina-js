@@ -1,7 +1,8 @@
 'use strict'
 
+let gulp = require('gulp')
+
 let
-	gulp =      require('gulp'),
 	rename =    require('gulp-rename'),
 	plumber =   require('gulp-plumber'),
 	minifyJS =  require('gulp-babel-minify')

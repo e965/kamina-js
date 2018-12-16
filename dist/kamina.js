@@ -112,13 +112,11 @@ let $storage = {
 		let test = `$s_${Math.random()}`
 
 		try {
-			console.log(this.getType_)
-
 			this.set(test, test)
 			this.rm(test)
 			return true
-		} catch (e) { console.log(e); return false }
+		} catch (e) { return false }
 	}
 }
 
-let $ls = $storage // для сохранения совместимости со старыми версиями
+let $ls = $storage // for backward compatibility with older versions
