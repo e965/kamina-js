@@ -1,25 +1,20 @@
 'use strict'
 
-/*
- * kamina.js, yet another syntactic sugar
- * cojam.ru, 2017-2018
- */
-
-let $make = {
-	qs: (qS, options = []) => {
+const $make = {
+	qs: (selector, options = []) => {
 		return options.includes('a')
-			? document.querySelectorAll(qS)
-			: document.querySelector(qS)
+			? document.querySelectorAll(selector)
+			: document.querySelector(selector)
 	},
 
-	qsf: (qS, from, options = []) => {
+	qsf: (selector, from, options = []) => {
 		if (!from.nodeName) {
 			from = document.querySelector(from)
 		}
 
 		return options.includes('a')
-			? from.querySelectorAll(qS)
-			: from.querySelector(qS)
+			? from.querySelectorAll(selector)
+			: from.querySelector(selector)
 	},
 
 	safe: value => value.toString()
@@ -30,12 +25,12 @@ let $make = {
 		.replace(/"/g, '&#34;')
 }
 
-let $create = {
+const $create = {
 	elem: (what = '', content = '', classes = '', options = []) => {
 		let elem = document.createElement(what)
 
 		if (classes != '') {
-			elem.setAttribute('class', classes)
+			elem.className = classes
 		}
 
 		if (content != '') {
@@ -63,7 +58,7 @@ let $create = {
 		}
 
 		if (classes != '') {
-			link.setAttribute('class', classes)
+			link.className = classes
 		}
 
 		if (content != '') {
@@ -80,7 +75,7 @@ let $create = {
 	text: content => document.createTextNode(content)
 }
 
-let $check = {
+const $check = {
 	get: value => {
 		let params = new URLSearchParams(location.search)
 
@@ -90,7 +85,7 @@ let $check = {
 	}
 }
 
-let $storage = {
+const $storage = {
 	getType: (options = []) =>
 		options.includes('s')
 			? sessionStorage
@@ -119,4 +114,4 @@ let $storage = {
 	}
 }
 
-let $ls = $storage // for backward compatibility with older versions
+const $ls = $storage // for backward compatibility with older versions
